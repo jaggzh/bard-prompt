@@ -1,0 +1,42 @@
+#!/usr/bin/env python
+import os
+from datetime import datetime
+import sys
+
+import os; import sys; import inspect;
+def get_script_final_dir():
+	if getattr(sys, 'frozen', False): # py2exe, PyInstaller, cx_Freeze
+		path = os.path.abspath(sys.executable)
+	else: path = inspect.getabsfile(get_script_final_dir)
+	path = os.path.realpath(path)
+	return os.path.dirname(path)
+def usage():
+	print('''Usage: bard-log [-h|--help]
+Where:
+  -h | --help   this help
+''')
+if '-h' in sys.argv or '--help' in sys.argv:
+	usage(); sys.exit(0)
+
+our_dir = get_script_final_dir()
+dir_log=os.path.join(our_dir, 'data/log')
+print("Logs at:", dir_log)
+
+def list_files(dir=None):
+	if dir is None:
+		raise ValueError("No directory provided")
+
+	files = os.listdir(dir)
+	file_info = [(f, os.path.getmtime(os.path.join(dir, f)), os.path.getsize(os.path.join(dir, f))) \
+				for f in files if os.path.isfile(os.path.join(dir, f))]
+
+	file_info.sort(key=lambda x: x[1], reverse=False)
+
+	max_filename_length = max(len(filename) for filename, _, _ in file_info)
+	max_size_length = max(len(str(size)) for _, _, size in file_info)
+
+	for filename, mtime, size in file_info:
+		time_str = datetime.fromtimestamp(mtime).strftime('%Y-%m-%d %H:%M:%S')
+		print(f"{filename:<{max_filename_length}}  {size:<{max_size_length}}  {time_str}")
+
+list_files(dir_log)

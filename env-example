@@ -1,0 +1,14 @@
+# Setup:
+#  Follow instructions before each variable below:
+
+#  1. Set your key below, as per bardapi project's instructions:
+export _BARD_API_KEY=""
+
+#  2. Set your venv PATH *AND* a unique part of your venv path.
+#     * Note: The regex is used to test `which python3` to see if we need
+#             to activate the environment or not.
+#     You can evaluate what to use for the regex by:
+#      2a. Activating your venv and typing `which python`.
+#      2b. A substring is sufficient
+bard_venv_path="$HOME/my_venvs/bard"
+bard_venv_path_regex='my_venvs/bard'

@@ -1,0 +1,42 @@
+#!/bin/bash
+# Set debug=1 for some debug prints (anything else is NO debug)
+debug=
+debug=1
+
+ourdir="$(dirname "$(readlink -f "$0")")"
+envbin="$ourdir/env"
+venv_activate_bin="$bard_venv_path/bin/activate"
+
+load_venv=0
+
+# Make sure our `env` file is there
+if [[ ! -e $envbin ]]; then
+	echo "ERROR: Can't find env settings file at $envbin" >&2
+	echo "(Go copy env-example and edit it.)" >&2
+	exit
+fi
+. "$envbin"
+
+# Find python3 so we can locate our venv
+pybin=$(which python3)
+if [[ -z $pybin ]]; then
+	[[ $debug = 1 ]] &&
+		echo "python3 not found in path" >&2
+	load_venv=1
+elif ! grep -q "$bard_venv_test_regex" <<<"$pybin"; then
+	[[ $debug = 1 ]] &&
+		echo "Our bard venv does not seem to be active" >&2
+	load_venv=1
+fi
+
+# Activate venv if needed
+if [[ $load_venv != 1 ]]; then
+	[[ $debug = 1 ]] && {
+			echo "  Attempting to load venv" >&2
+			echo "  Location: $venv_activate_bin" >&2
+			. "$venv_activate_bin"
+		}
+	. "$venv_activate_bin"
+fi
+python3 "$ourdir/bard-prompt.py" "$@"
+
