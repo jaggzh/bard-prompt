@@ -20,7 +20,6 @@ if '-h' in sys.argv or '--help' in sys.argv:
 
 our_dir = get_script_final_dir()
 dir_log=os.path.join(our_dir, 'data/log')
-print("Logs at:", dir_log)
 
 def list_files(dir=None):
 	if dir is None:
@@ -39,4 +38,6 @@ def list_files(dir=None):
 		time_str = datetime.fromtimestamp(mtime).strftime('%Y-%m-%d %H:%M:%S')
 		print(f"{filename:<{max_filename_length}}  {size:<{max_size_length}}  {time_str}")
 
+print("Logs at:", dir_log)
 list_files(dir_log)
+print("Logs at:", dir_log)

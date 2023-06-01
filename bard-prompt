@@ -5,9 +5,6 @@ debug=1
 
 ourdir="$(dirname "$(readlink -f "$0")")"
 envbin="$ourdir/env"
-venv_activate_bin="$bard_venv_path/bin/activate"
-
-load_venv=0
 
 # Make sure our `env` file is there
 if [[ ! -e $envbin ]]; then
@@ -16,6 +13,10 @@ if [[ ! -e $envbin ]]; then
 	exit
 fi
 . "$envbin"
+venv_activate_bin="$bard_venv_path/bin/activate"
+load_venv=0
+
+####### Our environment should be active now #######
 
 # Find python3 so we can locate our venv
 pybin=$(which python3)
