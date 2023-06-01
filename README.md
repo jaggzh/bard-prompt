@@ -2,12 +2,13 @@
 
 ## Installation
 
-1. Set up a venv. At present this is hard-coded in `env` as `bard`
-1. Copy env-example to env and edit it to add your key, as per the `bardapi` instructions.
-1. Activate your venv
-1. Install `bardapi` from its github repo wherever that is... into your venv.
+1. Create a venv for this project
+    1. ie. `python3 -m venv 'somedir/bardprompt'`
+1. Copy env-example to env and edit it. Follow its instructions.
+1. Activate your new venv for the next step...
+1. Install `bardapi` from its github repo... wherever that is
 
-## About
+## Notes:
 
 `bard-prompt` is a bash wrapper around `bard-prompt.py`. It checks if the venv is active and enables it if needed
 
