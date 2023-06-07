@@ -5,8 +5,8 @@ import sys
 import os; import sys; import inspect;
 import argparse
 import subprocess
-
-editors=['jless', 'vim']
+import settings as stg
+import common as com
 
 def get_script_final_dir():
 	if getattr(sys, 'frozen', False): # py2exe, PyInstaller, cx_Freeze
@@ -43,25 +43,14 @@ def edit_log_last_n(dir=None, n=1):
 	if cnt < n: print(f"Only {cnt} logs available. {n} is invalid."); return
 	last_finfo = files_info[-n]
 	path = os.path.join(dir, last_finfo[0])
-	success = False
-	for editor in editors:
-		try:
-			subprocess.run([editor, path])
-			success = True
-			break
-		except: pass
-	if not success:
-		editor = os.getenv('EDITOR')
-		if editor is not None:
-			try:
-				subprocess.run([editor, path])
-				success = True
-			except: pass
-	if success:
-		print('')
-	else:
-		print(f"No editor found in {editors} or env(EDITOR)",
+	rc = com.execute_first_in_list(stg.editors_json,
+	                                    fallbacks=[os.getenv('EDITOR'),
+	                                    args=[path])
+	if rc is None:
+		print(f"No editor found in {editors_json} or env(EDITOR)",
 			file=sys.stderr)
+	else:
+		print('')
 
 def list_files(dir=None):
 	if dir is None: raise ValueError("No directory provided")

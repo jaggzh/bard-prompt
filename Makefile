@@ -9,5 +9,6 @@ vi:
 		bard-prompt.py \
 		bard-log \
 		settings.py \
+		common.py \
 
 v: vi

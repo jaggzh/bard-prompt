@@ -39,5 +39,5 @@ if [[ $load_venv != 1 ]]; then
 		}
 	. "$venv_activate_bin"
 fi
-python3 "$ourdir/bard-prompt.py" "$@"
+"$ourdir/bard-prompt.py" "$*"
 
