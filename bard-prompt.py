@@ -60,6 +60,7 @@ def log(prompt, response):
 		if os.path.exists(fn):
 			time.sleep(.01)
 		else: break
+	response['images'] = None
 	result = {
 		'date': timestr,
 		'prompt': prompt,
