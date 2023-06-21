@@ -117,6 +117,8 @@ def main():
 	if response is None:
 		printe("{bred}Error, response from bard is None{rst}")
 		raise(ValueError("Bard response is None"))
+	response['images'] = None
+	# import ipdb; ipdb.set_trace(context=21); pass
 	log(in_txt, response)
 	try:
 		print(response['content'])
