@@ -144,7 +144,7 @@ def main():
 	# print(f" len args.text: {len(args.text)}")
 	# exit()
 	# import ipdb; ipdb.set_trace()
-	if args.text is not None:
+	if args.text is not None and len(args.text)>0:
 		if len(args.text) == 1 and os.path.isfile(args.text[0]):
 			in_fn = in_txt
 			with open(in_txt, 'r') as F:
@@ -159,7 +159,7 @@ def main():
 				print("Aborted.")
 				exit(0)
 	# User did NOT provide any text, but asked for the editor:
-	elif args.edit_prompt is not None:
+	elif args.edit_prompt:
 		in_txt = prompt_editor(args=args)
 		if in_txt is None:
 			print("Aborted.")
