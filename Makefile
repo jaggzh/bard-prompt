@@ -8,6 +8,7 @@ vi:
 		bard-prompt \
 		bard-prompt.py \
 		bard-log \
+		bard-log.py \
 		settings.py \
 		common.py \
 

@@ -1,5 +1,6 @@
 import os, sys
 import inspect
+from bansi import *
 
 def get_script_final_dir():
 	if getattr(sys, 'frozen', False): # py2exe, PyInstaller, cx_Freeze

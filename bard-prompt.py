@@ -8,6 +8,7 @@ import argparse
 import re
 import settings as stg
 import common as com
+import subprocess
 
 args=None
 
@@ -107,6 +108,29 @@ def prompt_editor(args=None, initial_text=None):
 		os.remove(tmpfile)
 		return text_content
 
+def print_response(response):
+	string = response['content']
+	command = "less -F"
+	process = subprocess.Popen(command, shell=True, stdin=subprocess.PIPE)
+	process.stdin.write(string.encode("utf-8"))
+	process.stdin.close()
+	process.wait()
+
+# def print_response(response):
+# 	content = response['content']
+# 	# Open a pipe to the `less` command
+# 	process = subprocess.Popen(['less', '-F'], stdin=subprocess.PIPE, universal_newlines=True)
+	
+# 	# Write the content to `less`
+# 	try:
+# 		process.stdin.write(content)
+# 	except BrokenPipeError:
+# 		# The pipe is closed (e.g., by q) before all data is written. This can be ignored.
+# 		pass
+# 	finally:
+# 		# Close the input stream to `less`.
+# 		process.stdin.close()
+
 def main():
 	init()
 	response = None
@@ -158,7 +182,7 @@ def main():
 			raise(ValueError("Bard response is None"))
 		log(in_txt, response)
 		try:
-			print(response['content'])
+			print_response(response)
 		except:
 			printe("Error accessing response['content']")
 

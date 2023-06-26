@@ -39,5 +39,9 @@ if [[ $load_venv != 1 ]]; then
 		}
 	. "$venv_activate_bin"
 fi
-"$ourdir/bard-prompt.py" "$*"
+cols=$(($(tput cols) - 1))
+# echo -ne '\033[44;37m'
+# for ((i=0; i<cols; i++)); do echo -n '='; done
+# echo -e '\033[;m'
+"$ourdir/bard-prompt.py" "$@"
 
