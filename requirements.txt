@@ -1,5 +1,4 @@
-#wheel
-#git+https://github.com/dsdanielpark/Bard-API
-# ipdb is optional
-
+wheel
+git+https://github.com/dsdanielpark/Bard-API
+# ipdb is optional, but is imported so I'm leaving it for dev convenience
 ipdb
